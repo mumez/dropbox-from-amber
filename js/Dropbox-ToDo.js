@@ -186,11 +186,11 @@ category: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(_st(self)._client())._initAuthDriverRedirect();
+_st(_st(self)._client())._initAuthDriver();
 return self}, function($ctx1) {$ctx1.fill(self,"initClient",{},smalltalk.DrToDoStorage)})},
 args: [],
-source: "initClient\x0a\x09self client initAuthDriverRedirect",
-messageSends: ["initAuthDriverRedirect", "client"],
+source: "initClient\x0a\x09self client initAuthDriver",
+messageSends: ["initAuthDriver", "client"],
 referencedClasses: []
 }),
 smalltalk.DrToDoStorage);

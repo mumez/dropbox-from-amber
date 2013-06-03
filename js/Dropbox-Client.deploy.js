@@ -856,9 +856,9 @@ selector: "initAuthDriver",
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(self)._initAuthDriverRedirect_(_st(_st(self)._class())._defaultAuthDriverType());
+_st(self)._initAuthDriver_(_st(_st(self)._class())._defaultAuthDriverType());
 return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriver",{},smalltalk.DrClient)})},
-messageSends: ["initAuthDriverRedirect:", "defaultAuthDriverType", "class"]}),
+messageSends: ["initAuthDriver:", "defaultAuthDriverType", "class"]}),
 smalltalk.DrClient);
 
 smalltalk.addMethod(
@@ -881,9 +881,10 @@ var driver;
 function $DrDrivers(){return smalltalk.DrDrivers||(typeof DrDrivers=="undefined"?nil:DrDrivers)}
 return smalltalk.withContext(function($ctx1) { 
 driver=_st($DrDrivers())._perform_withArguments_(_st(driverSymbol).__comma(":"),[optionsDic]);
+_st(console)._log_(_st("##authDriver: ").__comma(driverSymbol));
 _st(self)._authDriver_(driver);
 return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriver:options:",{driverSymbol:driverSymbol,optionsDic:optionsDic,driver:driver},smalltalk.DrClient)})},
-messageSends: ["perform:withArguments:", ",", "authDriver:"]}),
+messageSends: ["perform:withArguments:", ",", "log:", "authDriver:"]}),
 smalltalk.DrClient);
 
 smalltalk.addMethod(
@@ -1448,9 +1449,10 @@ selector: "defaultApiKey:",
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
+_st(console)._log_(_st("##set api key: ").__comma(_st(aString)._asString()));
 self["@defaultApiKey"]=aString;
 return self}, function($ctx1) {$ctx1.fill(self,"defaultApiKey:",{aString:aString},smalltalk.DrClient.klass)})},
-messageSends: []}),
+messageSends: ["log:", ",", "asString"]}),
 smalltalk.DrClient.klass);
 
 smalltalk.addMethod(
@@ -1478,9 +1480,10 @@ selector: "defaultAuthDriverType:",
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
+_st(console)._log_(_st("##set auth driver: ").__comma(_st(aString)._asString()));
 self["@defaultAuthDriverType"]=aString;
 return self}, function($ctx1) {$ctx1.fill(self,"defaultAuthDriverType:",{aString:aString},smalltalk.DrClient.klass)})},
-messageSends: []}),
+messageSends: ["log:", ",", "asString"]}),
 smalltalk.DrClient.klass);
 
 smalltalk.addMethod(

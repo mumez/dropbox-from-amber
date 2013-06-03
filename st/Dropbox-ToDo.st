@@ -70,7 +70,7 @@ ensureAuthThen: nextBlock
 !DrToDoStorage methodsFor: 'initialization'!
 
 initClient
-	self client initAuthDriverRedirect
+	self client initAuthDriver
 !
 
 initialize

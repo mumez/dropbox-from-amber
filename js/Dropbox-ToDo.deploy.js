@@ -149,9 +149,9 @@ selector: "initClient",
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(_st(self)._client())._initAuthDriverRedirect();
+_st(_st(self)._client())._initAuthDriver();
 return self}, function($ctx1) {$ctx1.fill(self,"initClient",{},smalltalk.DrToDoStorage)})},
-messageSends: ["initAuthDriverRedirect", "client"]}),
+messageSends: ["initAuthDriver", "client"]}),
 smalltalk.DrToDoStorage);
 
 smalltalk.addMethod(

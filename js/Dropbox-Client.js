@@ -1178,11 +1178,11 @@ category: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(self)._initAuthDriverRedirect_(_st(_st(self)._class())._defaultAuthDriverType());
+_st(self)._initAuthDriver_(_st(_st(self)._class())._defaultAuthDriverType());
 return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriver",{},smalltalk.DrClient)})},
 args: [],
-source: "initAuthDriver\x0a\x09self initAuthDriverRedirect: self class defaultAuthDriverType",
-messageSends: ["initAuthDriverRedirect:", "defaultAuthDriverType", "class"],
+source: "initAuthDriver\x0a\x09self initAuthDriver: self class defaultAuthDriverType",
+messageSends: ["initAuthDriver:", "defaultAuthDriverType", "class"],
 referencedClasses: []
 }),
 smalltalk.DrClient);
@@ -1213,11 +1213,12 @@ var driver;
 function $DrDrivers(){return smalltalk.DrDrivers||(typeof DrDrivers=="undefined"?nil:DrDrivers)}
 return smalltalk.withContext(function($ctx1) { 
 driver=_st($DrDrivers())._perform_withArguments_(_st(driverSymbol).__comma(":"),[optionsDic]);
+_st(console)._log_(_st("##authDriver: ").__comma(driverSymbol));
 _st(self)._authDriver_(driver);
 return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriver:options:",{driverSymbol:driverSymbol,optionsDic:optionsDic,driver:driver},smalltalk.DrClient)})},
 args: ["driverSymbol", "optionsDic"],
-source: "initAuthDriver: driverSymbol options: optionsDic\x0a\x09| driver |\x0a\x09driver := DrDrivers perform: driverSymbol, ':' withArguments: {optionsDic}.\x0a\x09self authDriver: driver",
-messageSends: ["perform:withArguments:", ",", "authDriver:"],
+source: "initAuthDriver: driverSymbol options: optionsDic\x0a\x09| driver |\x0a\x09driver := DrDrivers perform: driverSymbol, ':' withArguments: {optionsDic}.\x0a\x09console log: '##authDriver: ', driverSymbol.\x0a\x09self authDriver: driver",
+messageSends: ["perform:withArguments:", ",", "log:", "authDriver:"],
 referencedClasses: ["DrDrivers"]
 }),
 smalltalk.DrClient);
@@ -1975,11 +1976,12 @@ category: 'accessing',
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
+_st(console)._log_(_st("##set api key: ").__comma(_st(aString)._asString()));
 self["@defaultApiKey"]=aString;
 return self}, function($ctx1) {$ctx1.fill(self,"defaultApiKey:",{aString:aString},smalltalk.DrClient.klass)})},
 args: ["aString"],
-source: "defaultApiKey: aString\x0a\x09defaultApiKey := aString",
-messageSends: [],
+source: "defaultApiKey: aString\x0a\x09console log: '##set api key: ', aString asString.\x0a\x09defaultApiKey := aString",
+messageSends: ["log:", ",", "asString"],
 referencedClasses: []
 }),
 smalltalk.DrClient.klass);
@@ -2002,7 +2004,7 @@ $1=$2;
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"defaultAuthDriverType",{},smalltalk.DrClient.klass)})},
 args: [],
-source: "defaultAuthDriverType\x0a\x09^ defaultAuthDriverType ifNil: [defaultAuthDriverType := 'redirect']",
+source: "defaultAuthDriverType\x0a\x0a\x09^ defaultAuthDriverType ifNil: [defaultAuthDriverType := 'redirect']",
 messageSends: ["ifNil:"],
 referencedClasses: []
 }),
@@ -2015,11 +2017,12 @@ category: 'accessing',
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
+_st(console)._log_(_st("##set auth driver: ").__comma(_st(aString)._asString()));
 self["@defaultAuthDriverType"]=aString;
 return self}, function($ctx1) {$ctx1.fill(self,"defaultAuthDriverType:",{aString:aString},smalltalk.DrClient.klass)})},
 args: ["aString"],
-source: "defaultAuthDriverType: aString\x0a\x09defaultAuthDriverType := aString",
-messageSends: [],
+source: "defaultAuthDriverType: aString\x0a\x09console log: '##set auth driver: ', aString asString.\x0a\x09defaultAuthDriverType := aString",
+messageSends: ["log:", ",", "asString"],
 referencedClasses: []
 }),
 smalltalk.DrClient.klass);
@@ -2034,7 +2037,7 @@ return smalltalk.withContext(function($ctx1) {
 self["@default"]=nil;
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.DrClient.klass)})},
 args: [],
-source: "initialize\x0a\x09default := nil",
+source: "initialize\x0a\x09default := nil.",
 messageSends: [],
 referencedClasses: []
 }),

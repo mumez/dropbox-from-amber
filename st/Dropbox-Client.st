@@ -482,7 +482,7 @@ onFailed: anError
 !DrClient methodsFor: 'initialization'!
 
 initAuthDriver
-	self initAuthDriverRedirect: self class defaultAuthDriverType
+	self initAuthDriver: self class defaultAuthDriverType
 !
 
 initAuthDriver: driverSymbol
@@ -492,6 +492,7 @@ initAuthDriver: driverSymbol
 initAuthDriver: driverSymbol options: optionsDic
 	| driver |
 	driver := DrDrivers perform: driverSymbol, ':' withArguments: {optionsDic}.
+	console log: '##authDriver: ', driverSymbol.
 	self authDriver: driver
 !
 
@@ -540,21 +541,24 @@ defaultApiKey
 !
 
 defaultApiKey: aString
+	console log: '##set api key: ', aString asString.
 	defaultApiKey := aString
 !
 
 defaultAuthDriverType
+
 	^ defaultAuthDriverType ifNil: [defaultAuthDriverType := 'redirect']
 !
 
 defaultAuthDriverType: aString
+	console log: '##set auth driver: ', aString asString.
 	defaultAuthDriverType := aString
 ! !
 
 !DrClient class methodsFor: 'class initialization'!
 
 initialize
-	default := nil
+	default := nil.
 ! !
 
 !DrClient class methodsFor: 'instance creation'!
