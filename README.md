@@ -37,11 +37,11 @@ smalltalk.DrClient._defaultAuthDriverType_('cordova');
 ## Example ##
 
 ### Extended ToDoList Example ###
-dropboxFromAmber includes an extended ToDoList example. While the original [jqmForAmber example](https://github.com/mumez/jqm-from-amber) stores data to html5 localStorage, this version saves tasks to Dropbox.
+[dropboxFromAmber](https://github.com/mumez/dropbox-from-amber) includes an extended ToDoList example. While the original [jqmFromAmber example](https://github.com/mumez/jqm-from-amber) stores data to html5 localStorage, this version saves tasks to Dropbox.
 
 How to try the example:
 
-0. install the demo prerequisite -- [jqmForAmber](https://github.com/mumez/jqm-from-amber). It is used for ToDoList UI.
+0. install the demo prerequisite -- [jqmFromAmber](https://github.com/mumez/jqm-from-amber). It is used for ToDoList UI.
 1. start amber server
 2. open the demo page ([http://localhost:4000/dropboxFromAmber.html](http://localhost:4000/dropboxFromAmber.html)) with your favorite web browser.
 
