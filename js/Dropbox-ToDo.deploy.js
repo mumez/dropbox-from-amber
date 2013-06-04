@@ -2,18 +2,6 @@ smalltalk.addPackage('Dropbox-ToDo');
 smalltalk.addClass('DrToDo', smalltalk.MobileToDo, [], 'Dropbox-ToDo');
 smalltalk.addMethod(
 smalltalk.method({
-selector: "initialize",
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-smalltalk.MobileToDo.fn.prototype._initialize.apply(_st(self), []);
-_st(self)._observeStorage();
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.DrToDo)})},
-messageSends: ["initialize", "observeStorage"]}),
-smalltalk.DrToDo);
-
-smalltalk.addMethod(
-smalltalk.method({
 selector: "observeStorage",
 fn: function (){
 var self=this;
@@ -33,6 +21,18 @@ return _st(self)._showErrorFrom_(ann);
 }, function($ctx2) {$ctx2.fillBlock({ann:ann},$ctx1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"observeStorage",{},smalltalk.DrToDo)})},
 messageSends: ["on:do:", "updateListPart", "announcer", "storage", "ifTrue:", "showErrorFrom:", "=", "kind", "client"]}),
+smalltalk.DrToDo);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "preOpen",
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+smalltalk.MobileToDo.fn.prototype._preOpen.apply(_st(self), []);
+_st(self)._observeStorage();
+return self}, function($ctx1) {$ctx1.fill(self,"preOpen",{},smalltalk.DrToDo)})},
+messageSends: ["preOpen", "observeStorage"]}),
 smalltalk.DrToDo);
 
 smalltalk.addMethod(
@@ -89,6 +89,22 @@ return $1;
 messageSends: []}),
 smalltalk.DrToDo);
 
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "openThen:",
+fn: function (nextBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(_st(_st(self)._current())._storage())._ensureAuthThen_((function(){
+return smalltalk.withContext(function($ctx2) {
+_st(_st(self)._current())._start();
+_st(nextBlock)._value();
+return _st(console)._log_("##todo opened");
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"openThen:",{nextBlock:nextBlock},smalltalk.DrToDo.klass)})},
+messageSends: ["ensureAuthThen:", "start", "current", "value", "log:", "storage"]}),
+smalltalk.DrToDo.klass);
 
 
 smalltalk.addClass('DrToDoStorage', smalltalk.MobileToDoStorage, ['announcer'], 'Dropbox-ToDo');

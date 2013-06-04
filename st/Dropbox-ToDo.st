@@ -11,16 +11,17 @@ storageClass
 	^ DrToDoStorage
 ! !
 
-!DrToDo methodsFor: 'initialization'!
+!DrToDo methodsFor: 'opening'!
 
-initialize
-	super initialize.
+preOpen
+	super preOpen.
 	self observeStorage
 ! !
 
 !DrToDo methodsFor: 'private'!
 
 observeStorage
+
 	self storage announcer on: DrAnnouncement do: [:ann | 
 		self updateListPart
 	].
@@ -43,6 +44,16 @@ showErrorFrom: anAnnouncement
 	status = DrApiError networkError ifTrue: [^window alert: 'Network error. Try reconnect'].
 	
 	window alert: ('Dropbox api error: ', status asString).
+! !
+
+!DrToDo class methodsFor: 'opening'!
+
+openThen: nextBlock
+	self current storage ensureAuthThen: [
+		self current start.
+		nextBlock value.
+		console log: '##todo opened'
+	]
 ! !
 
 MobileToDoStorage subclass: #DrToDoStorage

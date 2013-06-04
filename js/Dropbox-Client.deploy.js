@@ -661,7 +661,7 @@ fn: function (nextBlock){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $2,$1;
-$1=_st(self)._authenticate_callback_(nil,(function(err,cli){
+$1=_st(self)._authenticate_callback_(_st(self)._defaultAuthOptions(),(function(err,cli){
 return smalltalk.withContext(function($ctx2) {
 $2=err;
 if(($receiver = $2) == nil || $receiver == undefined){
@@ -673,7 +673,7 @@ return _st(self)._onAuthenticatationFailed_(_st(self)._wrapError_(err));
 }, function($ctx2) {$ctx2.fillBlock({err:err,cli:cli},$ctx1)})}));
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"authenticateThen:",{nextBlock:nextBlock},smalltalk.DrClient)})},
-messageSends: ["authenticate:callback:", "ifNil:ifNotNil:", "onAuthenticated", "value", "onAuthenticatationFailed:", "wrapError:"]}),
+messageSends: ["authenticate:callback:", "defaultAuthOptions", "ifNil:ifNotNil:", "onAuthenticated", "value", "onAuthenticatationFailed:", "wrapError:"]}),
 smalltalk.DrClient);
 
 smalltalk.addMethod(
@@ -721,6 +721,32 @@ $1=_st(self)._forwardMessage_withArguments_("credentials",[]);
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"credentials",{},smalltalk.DrClient)})},
 messageSends: ["forwardMessage:withArguments:"]}),
+smalltalk.DrClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "defaultAuthDriverOptions",
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=smalltalk.HashedCollection._fromPairs_([_st("rememberUser").__minus_gt(true)]);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"defaultAuthDriverOptions",{},smalltalk.DrClient)})},
+messageSends: ["->"]}),
+smalltalk.DrClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "defaultAuthOptions",
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=smalltalk.HashedCollection._fromPairs_([]);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"defaultAuthOptions",{},smalltalk.DrClient)})},
+messageSends: []}),
 smalltalk.DrClient);
 
 smalltalk.addMethod(
@@ -867,9 +893,9 @@ selector: "initAuthDriver:",
 fn: function (driverSymbol){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(self)._initAuthDriver_options_(driverSymbol,smalltalk.HashedCollection._fromPairs_([]));
+_st(self)._initAuthDriver_options_(driverSymbol,_st(self)._defaultAuthDriverOptions());
 return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriver:",{driverSymbol:driverSymbol},smalltalk.DrClient)})},
-messageSends: ["initAuthDriver:options:"]}),
+messageSends: ["initAuthDriver:options:", "defaultAuthDriverOptions"]}),
 smalltalk.DrClient);
 
 smalltalk.addMethod(
@@ -885,28 +911,6 @@ _st(console)._log_(_st("##authDriver: ").__comma(driverSymbol));
 _st(self)._authDriver_(driver);
 return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriver:options:",{driverSymbol:driverSymbol,optionsDic:optionsDic,driver:driver},smalltalk.DrClient)})},
 messageSends: ["perform:withArguments:", ",", "log:", "authDriver:"]}),
-smalltalk.DrClient);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "initAuthDriverCordova",
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-_st(self)._initAuthDriver_options_("cordova",smalltalk.HashedCollection._fromPairs_([_st("rememberUser").__minus_gt(true)]));
-return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriverCordova",{},smalltalk.DrClient)})},
-messageSends: ["initAuthDriver:options:", "->"]}),
-smalltalk.DrClient);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "initAuthDriverRedirect",
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-_st(self)._initAuthDriver_options_("redirect",smalltalk.HashedCollection._fromPairs_([_st("rememberUser").__minus_gt(true)]));
-return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriverRedirect",{},smalltalk.DrClient)})},
-messageSends: ["initAuthDriver:options:", "->"]}),
 smalltalk.DrClient);
 
 smalltalk.addMethod(

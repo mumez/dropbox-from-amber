@@ -18,10 +18,7 @@
 			ready: function(){
 					smalltalk.DrClient._defaultApiKey_('lT8r2O3iMCA=|ULla/D4WPtfkec3nxbtR+V861w9E+U9+krMlTYrV/A==');
 					//smalltalk.DrClient._defaultAuthDriverType_('cordova');
-					smalltalk.DrToDo._main();
-					console.log('#amber page loaded');
-					$.mobile.initializePage();
-					console.log('#jqm page initialized');
+					smalltalk.DrToDo._openThen_($.mobile.initializePage);
 			}});
 	});
 	</script>

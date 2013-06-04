@@ -3,23 +3,6 @@ smalltalk.addClass('DrToDo', smalltalk.MobileToDo, [], 'Dropbox-ToDo');
 smalltalk.DrToDo.comment="DrToDo main"
 smalltalk.addMethod(
 smalltalk.method({
-selector: "initialize",
-category: 'initialization',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-smalltalk.MobileToDo.fn.prototype._initialize.apply(_st(self), []);
-_st(self)._observeStorage();
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.DrToDo)})},
-args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09self observeStorage",
-messageSends: ["initialize", "observeStorage"],
-referencedClasses: []
-}),
-smalltalk.DrToDo);
-
-smalltalk.addMethod(
-smalltalk.method({
 selector: "observeStorage",
 category: 'private',
 fn: function (){
@@ -40,9 +23,26 @@ return _st(self)._showErrorFrom_(ann);
 }, function($ctx2) {$ctx2.fillBlock({ann:ann},$ctx1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"observeStorage",{},smalltalk.DrToDo)})},
 args: [],
-source: "observeStorage\x0a\x09self storage announcer on: DrAnnouncement do: [:ann | \x0a\x09\x09self updateListPart\x0a\x09].\x0a\x09\x0a\x09self storage client announcer on: DrAnnouncement do: [:ann | \x0a\x09\x09ann kind = #apiError ifTrue: [\x0a\x09\x09\x09self showErrorFrom: ann\x0a\x09\x09]\x0a\x09]",
+source: "observeStorage\x0a\x0a\x09self storage announcer on: DrAnnouncement do: [:ann | \x0a\x09\x09self updateListPart\x0a\x09].\x0a\x09\x0a\x09self storage client announcer on: DrAnnouncement do: [:ann | \x0a\x09\x09ann kind = #apiError ifTrue: [\x0a\x09\x09\x09self showErrorFrom: ann\x0a\x09\x09]\x0a\x09]",
 messageSends: ["on:do:", "updateListPart", "announcer", "storage", "ifTrue:", "showErrorFrom:", "=", "kind", "client"],
 referencedClasses: ["DrAnnouncement"]
+}),
+smalltalk.DrToDo);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "preOpen",
+category: 'opening',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+smalltalk.MobileToDo.fn.prototype._preOpen.apply(_st(self), []);
+_st(self)._observeStorage();
+return self}, function($ctx1) {$ctx1.fill(self,"preOpen",{},smalltalk.DrToDo)})},
+args: [],
+source: "preOpen\x0a\x09super preOpen.\x0a\x09self observeStorage",
+messageSends: ["preOpen", "observeStorage"],
+referencedClasses: []
 }),
 smalltalk.DrToDo);
 
@@ -110,6 +110,27 @@ referencedClasses: ["DrToDoStorage"]
 }),
 smalltalk.DrToDo);
 
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "openThen:",
+category: 'opening',
+fn: function (nextBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(_st(_st(self)._current())._storage())._ensureAuthThen_((function(){
+return smalltalk.withContext(function($ctx2) {
+_st(_st(self)._current())._start();
+_st(nextBlock)._value();
+return _st(console)._log_("##todo opened");
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"openThen:",{nextBlock:nextBlock},smalltalk.DrToDo.klass)})},
+args: ["nextBlock"],
+source: "openThen: nextBlock\x0a\x09self current storage ensureAuthThen: [\x0a\x09\x09self current start.\x0a\x09\x09nextBlock value.\x0a\x09\x09console log: '##todo opened'\x0a\x09]",
+messageSends: ["ensureAuthThen:", "start", "current", "value", "log:", "storage"],
+referencedClasses: []
+}),
+smalltalk.DrToDo.klass);
 
 
 smalltalk.addClass('DrToDoStorage', smalltalk.MobileToDoStorage, ['announcer'], 'Dropbox-ToDo');

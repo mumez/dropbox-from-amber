@@ -909,7 +909,7 @@ $1=_st(self)._forwardMessage_withArguments_("authenticate",[options,callback]);
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"authenticate:callback:",{options:options,callback:callback},smalltalk.DrClient)})},
 args: ["options", "callback"],
-source: "authenticate: options callback: callback\x0a\x09^ self forwardMessage: 'authenticate' withArguments: {options. callback}",
+source: "authenticate: options callback: callback\x0a\x0a\x09^ self forwardMessage: 'authenticate' withArguments: {options. callback}",
 messageSends: ["forwardMessage:withArguments:"],
 referencedClasses: []
 }),
@@ -923,7 +923,7 @@ fn: function (nextBlock){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $2,$1;
-$1=_st(self)._authenticate_callback_(nil,(function(err,cli){
+$1=_st(self)._authenticate_callback_(_st(self)._defaultAuthOptions(),(function(err,cli){
 return smalltalk.withContext(function($ctx2) {
 $2=err;
 if(($receiver = $2) == nil || $receiver == undefined){
@@ -936,8 +936,8 @@ return _st(self)._onAuthenticatationFailed_(_st(self)._wrapError_(err));
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"authenticateThen:",{nextBlock:nextBlock},smalltalk.DrClient)})},
 args: ["nextBlock"],
-source: "authenticateThen: nextBlock\x0a\x09^ self authenticate: nil callback: [:err :cli |\x0a\x09\x09err ifNil: [self onAuthenticated. nextBlock value] ifNotNil: [self onAuthenticatationFailed: (self wrapError: err)].\x0a\x09]",
-messageSends: ["authenticate:callback:", "ifNil:ifNotNil:", "onAuthenticated", "value", "onAuthenticatationFailed:", "wrapError:"],
+source: "authenticateThen: nextBlock\x0a\x09^ self authenticate: self defaultAuthOptions callback: [:err :cli |\x0a\x09\x09err ifNil: [self onAuthenticated. nextBlock value] ifNotNil: [self onAuthenticatationFailed: (self wrapError: err)].\x0a\x09]",
+messageSends: ["authenticate:callback:", "defaultAuthOptions", "ifNil:ifNotNil:", "onAuthenticated", "value", "onAuthenticatationFailed:", "wrapError:"],
 referencedClasses: []
 }),
 smalltalk.DrClient);
@@ -1000,6 +1000,42 @@ return $1;
 args: [],
 source: "credentials\x0a\x09^ self forwardMessage: 'credentials' withArguments: #()",
 messageSends: ["forwardMessage:withArguments:"],
+referencedClasses: []
+}),
+smalltalk.DrClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "defaultAuthDriverOptions",
+category: 'defaults',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=smalltalk.HashedCollection._fromPairs_([_st("rememberUser").__minus_gt(true)]);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"defaultAuthDriverOptions",{},smalltalk.DrClient)})},
+args: [],
+source: "defaultAuthDriverOptions\x0a\x09^ #{'rememberUser'->true}.",
+messageSends: ["->"],
+referencedClasses: []
+}),
+smalltalk.DrClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "defaultAuthOptions",
+category: 'defaults',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=smalltalk.HashedCollection._fromPairs_([]);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"defaultAuthOptions",{},smalltalk.DrClient)})},
+args: [],
+source: "defaultAuthOptions\x0a\x09^ #{}.",
+messageSends: [],
 referencedClasses: []
 }),
 smalltalk.DrClient);
@@ -1194,11 +1230,11 @@ category: 'initialization',
 fn: function (driverSymbol){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(self)._initAuthDriver_options_(driverSymbol,smalltalk.HashedCollection._fromPairs_([]));
+_st(self)._initAuthDriver_options_(driverSymbol,_st(self)._defaultAuthDriverOptions());
 return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriver:",{driverSymbol:driverSymbol},smalltalk.DrClient)})},
 args: ["driverSymbol"],
-source: "initAuthDriver: driverSymbol\x0a\x09self initAuthDriver: driverSymbol options: #{}",
-messageSends: ["initAuthDriver:options:"],
+source: "initAuthDriver: driverSymbol\x0a\x09self initAuthDriver: driverSymbol options: self defaultAuthDriverOptions",
+messageSends: ["initAuthDriver:options:", "defaultAuthDriverOptions"],
 referencedClasses: []
 }),
 smalltalk.DrClient);
@@ -1220,38 +1256,6 @@ args: ["driverSymbol", "optionsDic"],
 source: "initAuthDriver: driverSymbol options: optionsDic\x0a\x09| driver |\x0a\x09driver := DrDrivers perform: driverSymbol, ':' withArguments: {optionsDic}.\x0a\x09console log: '##authDriver: ', driverSymbol.\x0a\x09self authDriver: driver",
 messageSends: ["perform:withArguments:", ",", "log:", "authDriver:"],
 referencedClasses: ["DrDrivers"]
-}),
-smalltalk.DrClient);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "initAuthDriverCordova",
-category: 'initialization',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-_st(self)._initAuthDriver_options_("cordova",smalltalk.HashedCollection._fromPairs_([_st("rememberUser").__minus_gt(true)]));
-return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriverCordova",{},smalltalk.DrClient)})},
-args: [],
-source: "initAuthDriverCordova\x0a\x09self initAuthDriver: #cordova options: #{'rememberUser'->true}.",
-messageSends: ["initAuthDriver:options:", "->"],
-referencedClasses: []
-}),
-smalltalk.DrClient);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "initAuthDriverRedirect",
-category: 'initialization',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-_st(self)._initAuthDriver_options_("redirect",smalltalk.HashedCollection._fromPairs_([_st("rememberUser").__minus_gt(true)]));
-return self}, function($ctx1) {$ctx1.fill(self,"initAuthDriverRedirect",{},smalltalk.DrClient)})},
-args: [],
-source: "initAuthDriverRedirect\x0a\x09self initAuthDriver: #redirect options: #{'rememberUser'->true}.",
-messageSends: ["initAuthDriver:options:", "->"],
-referencedClasses: []
 }),
 smalltalk.DrClient);
 

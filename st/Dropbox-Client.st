@@ -446,17 +446,28 @@ authenticate
 !
 
 authenticate: options callback: callback
+
 	^ self forwardMessage: 'authenticate' withArguments: {options. callback}
 !
 
 authenticateThen: nextBlock
-	^ self authenticate: nil callback: [:err :cli |
+	^ self authenticate: self defaultAuthOptions callback: [:err :cli |
 		err ifNil: [self onAuthenticated. nextBlock value] ifNotNil: [self onAuthenticatationFailed: (self wrapError: err)].
 	]
 !
 
 isAuthenticated
 	^ self forwardMessage: 'isAuthenticated' withArguments: #()
+! !
+
+!DrClient methodsFor: 'defaults'!
+
+defaultAuthDriverOptions
+	^ #{'rememberUser'->true}.
+!
+
+defaultAuthOptions
+	^ #{}.
 ! !
 
 !DrClient methodsFor: 'events'!
@@ -486,7 +497,7 @@ initAuthDriver
 !
 
 initAuthDriver: driverSymbol
-	self initAuthDriver: driverSymbol options: #{}
+	self initAuthDriver: driverSymbol options: self defaultAuthDriverOptions
 !
 
 initAuthDriver: driverSymbol options: optionsDic
@@ -494,14 +505,6 @@ initAuthDriver: driverSymbol options: optionsDic
 	driver := DrDrivers perform: driverSymbol, ':' withArguments: {optionsDic}.
 	console log: '##authDriver: ', driverSymbol.
 	self authDriver: driver
-!
-
-initAuthDriverCordova
-	self initAuthDriver: #cordova options: #{'rememberUser'->true}.
-!
-
-initAuthDriverRedirect
-	self initAuthDriver: #redirect options: #{'rememberUser'->true}.
 !
 
 initialize
