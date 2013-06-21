@@ -477,6 +477,150 @@ smalltalk.DrProxy.klass);
 smalltalk.addClass('DrApiError', smalltalk.DrProxy, [], 'Dropbox-Client');
 smalltalk.addMethod(
 smalltalk.method({
+selector: "isInvalidMethod",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(_st(self)._status()).__eq(_st(_st(self)._class())._invalidMethod());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isInvalidMethod",{},smalltalk.DrApiError)})},
+args: [],
+source: "isInvalidMethod\x0a\x09^ self status = self class invalidMethod ",
+messageSends: ["=", "invalidMethod", "class", "status"],
+referencedClasses: []
+}),
+smalltalk.DrApiError);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isInvalidParam",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(_st(self)._status()).__eq(_st(_st(self)._class())._invalidParam());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isInvalidParam",{},smalltalk.DrApiError)})},
+args: [],
+source: "isInvalidParam\x0a\x09^ self status = self class invalidParam ",
+messageSends: ["=", "invalidParam", "class", "status"],
+referencedClasses: []
+}),
+smalltalk.DrApiError);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isInvalidToken",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(_st(self)._status()).__eq(_st(_st(self)._class())._invalidToken());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isInvalidToken",{},smalltalk.DrApiError)})},
+args: [],
+source: "isInvalidToken\x0a\x09^ self status = self class invalidToken ",
+messageSends: ["=", "invalidToken", "class", "status"],
+referencedClasses: []
+}),
+smalltalk.DrApiError);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isNetworkError",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(_st(self)._status()).__eq(_st(_st(self)._class())._networkError());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isNetworkError",{},smalltalk.DrApiError)})},
+args: [],
+source: "isNetworkError\x0a\x09^ self status = self class networkError ",
+messageSends: ["=", "networkError", "class", "status"],
+referencedClasses: []
+}),
+smalltalk.DrApiError);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isNotFound",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(_st(self)._status()).__eq(_st(_st(self)._class())._notFound());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isNotFound",{},smalltalk.DrApiError)})},
+args: [],
+source: "isNotFound\x0a\x09^ self status = self class notFound ",
+messageSends: ["=", "notFound", "class", "status"],
+referencedClasses: []
+}),
+smalltalk.DrApiError);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isOauthError",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(_st(self)._status()).__eq(_st(_st(self)._class())._oauthError());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isOauthError",{},smalltalk.DrApiError)})},
+args: [],
+source: "isOauthError\x0a\x09^ self status = self class oauthError ",
+messageSends: ["=", "oauthError", "class", "status"],
+referencedClasses: []
+}),
+smalltalk.DrApiError);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isOverQuota",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(_st(self)._status()).__eq(_st(_st(self)._class())._overQuota());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isOverQuota",{},smalltalk.DrApiError)})},
+args: [],
+source: "isOverQuota\x0a\x09^ self status = self class overQuota ",
+messageSends: ["=", "overQuota", "class", "status"],
+referencedClasses: []
+}),
+smalltalk.DrApiError);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isRateLimited",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(_st(self)._status()).__eq(_st(_st(self)._class())._rateLimited());
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isRateLimited",{},smalltalk.DrApiError)})},
+args: [],
+source: "isRateLimited\x0a\x09^ self status = self class rateLimited ",
+messageSends: ["=", "rateLimited", "class", "status"],
+referencedClasses: []
+}),
+smalltalk.DrApiError);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "method",
 category: 'accessing',
 fn: function (){
@@ -1620,21 +1764,42 @@ fn: function (path,options,nextBlock){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
+$1=_st(self)._readFile_options_then_failed_(path,options,nextBlock,(function(){
+return smalltalk.withContext(function($ctx2) {
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1)})}));
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"readFile:options:then:",{path:path,options:options,nextBlock:nextBlock},smalltalk.DrClient)})},
+args: ["path", "options", "nextBlock"],
+source: "readFile: path options: options then: nextBlock\x0a\x09^self readFile: path options: options then: nextBlock failed: []",
+messageSends: ["readFile:options:then:failed:"],
+referencedClasses: []
+}),
+smalltalk.DrClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "readFile:options:then:failed:",
+category: 'actions',
+fn: function (path,options,nextBlock,failedBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
 $1=_st(self)._readFile_options_callback_(path,options,(function(apiError,data,stat,rangeInfo){
 return smalltalk.withContext(function($ctx2) {
 return _st(self)._ifError_do_else_(apiError,(function(err){
 return smalltalk.withContext(function($ctx3) {
-return _st(self)._onFailed_(err);
+_st(self)._onFailed_(err);
+return _st(failedBlock)._value_(err);
 }, function($ctx3) {$ctx3.fillBlock({err:err},$ctx1)})}),(function(){
 return smalltalk.withContext(function($ctx3) {
 return _st(nextBlock)._valueWithPossibleArguments_([data,stat,rangeInfo]);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx1)})}));
 }, function($ctx2) {$ctx2.fillBlock({apiError:apiError,data:data,stat:stat,rangeInfo:rangeInfo},$ctx1)})}));
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"readFile:options:then:",{path:path,options:options,nextBlock:nextBlock},smalltalk.DrClient)})},
-args: ["path", "options", "nextBlock"],
-source: "readFile: path options: options then: nextBlock\x0a\x09^self readFile: path options: options callback:  [:apiError :data :stat :rangeInfo |\x0a\x09\x09self ifError: apiError do: [:err | self onFailed: err] else: [nextBlock valueWithPossibleArguments: {data. stat. rangeInfo}].\x0a\x09]",
-messageSends: ["readFile:options:callback:", "ifError:do:else:", "onFailed:", "valueWithPossibleArguments:"],
+}, function($ctx1) {$ctx1.fill(self,"readFile:options:then:failed:",{path:path,options:options,nextBlock:nextBlock,failedBlock:failedBlock},smalltalk.DrClient)})},
+args: ["path", "options", "nextBlock", "failedBlock"],
+source: "readFile: path options: options then: nextBlock failed: failedBlock\x0a\x09^self readFile: path options: options callback:  [:apiError :data :stat :rangeInfo |\x0a\x09\x09self ifError: apiError do: [:err | self onFailed: err. failedBlock value: err] else: [nextBlock valueWithPossibleArguments: {data. stat. rangeInfo}].\x0a\x09]",
+messageSends: ["readFile:options:callback:", "ifError:do:else:", "onFailed:", "value:", "valueWithPossibleArguments:"],
 referencedClasses: []
 }),
 smalltalk.DrClient);
@@ -1653,6 +1818,24 @@ return $1;
 args: ["path", "nextBlock"],
 source: "readFile: path then: nextBlock\x0a\x09^self readFile: path options: nil then: nextBlock",
 messageSends: ["readFile:options:then:"],
+referencedClasses: []
+}),
+smalltalk.DrClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "readFile:then:failed:",
+category: 'actions',
+fn: function (path,nextBlock,failedBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(self)._readFile_options_then_failed_(path,nil,nextBlock,failedBlock);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"readFile:then:failed:",{path:path,nextBlock:nextBlock,failedBlock:failedBlock},smalltalk.DrClient)})},
+args: ["path", "nextBlock", "failedBlock"],
+source: "readFile: path then: nextBlock failed: failedBlock\x0a\x09^self readFile: path options: nil then: nextBlock failed: failedBlock",
+messageSends: ["readFile:options:then:failed:"],
 referencedClasses: []
 }),
 smalltalk.DrClient);

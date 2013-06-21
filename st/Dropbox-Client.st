@@ -200,6 +200,40 @@ printOn: aStream
 	aStream nextPutAll: ':', self status asString
 ! !
 
+!DrApiError methodsFor: 'testing'!
+
+isInvalidMethod
+	^ self status = self class invalidMethod
+!
+
+isInvalidParam
+	^ self status = self class invalidParam
+!
+
+isInvalidToken
+	^ self status = self class invalidToken
+!
+
+isNetworkError
+	^ self status = self class networkError
+!
+
+isNotFound
+	^ self status = self class notFound
+!
+
+isOauthError
+	^ self status = self class oauthError
+!
+
+isOverQuota
+	^ self status = self class overQuota
+!
+
+isRateLimited
+	^ self status = self class rateLimited
+! !
+
 !DrApiError class methodsFor: 'constants'!
 
 invalidMethod
@@ -374,13 +408,21 @@ readFile: path options: options callback: callback
 !
 
 readFile: path options: options then: nextBlock
+	^self readFile: path options: options then: nextBlock failed: []
+!
+
+readFile: path options: options then: nextBlock failed: failedBlock
 	^self readFile: path options: options callback:  [:apiError :data :stat :rangeInfo |
-		self ifError: apiError do: [:err | self onFailed: err] else: [nextBlock valueWithPossibleArguments: {data. stat. rangeInfo}].
+		self ifError: apiError do: [:err | self onFailed: err. failedBlock value: err] else: [nextBlock valueWithPossibleArguments: {data. stat. rangeInfo}].
 	]
 !
 
 readFile: path then: nextBlock
 	^self readFile: path options: nil then: nextBlock
+!
+
+readFile: path then: nextBlock failed: failedBlock
+	^self readFile: path options: nil then: nextBlock failed: failedBlock
 !
 
 remove: path
