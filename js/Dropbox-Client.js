@@ -311,6 +311,22 @@ smalltalk.DrProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "deferred",
+category: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+return $.Deferred();
+return self}, function($ctx1) {$ctx1.fill(self,"deferred",{},smalltalk.DrProxy)})},
+args: [],
+source: "deferred\x0a\x09<return $.Deferred()>",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.DrProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "inspectOn:",
 category: 'debugging',
 fn: function (anInspector){
@@ -329,6 +345,24 @@ args: ["anInspector"],
 source: "inspectOn: anInspector\x0a\x09| variables |\x0a\x09variables := Dictionary new.\x0a\x09variables at: '#self' put: self jsObject.\x0a\x09variables at: '#className' put: self className.\x0a\x09anInspector setLabel: self printString.\x0a\x09self addObjectVariablesTo: variables.\x0a\x09anInspector setVariables: variables",
 messageSends: ["new", "at:put:", "jsObject", "className", "setLabel:", "printString", "addObjectVariablesTo:", "setVariables:"],
 referencedClasses: ["Dictionary"]
+}),
+smalltalk.DrProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isNil",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(self._jsObject())._isNil();
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isNil",{},smalltalk.DrProxy)})},
+args: [],
+source: "isNil\x0a\x09^self jsObject isNil\x0a\x09",
+messageSends: ["isNil", "jsObject"],
+referencedClasses: []
 }),
 smalltalk.DrProxy);
 
@@ -387,11 +421,16 @@ category: 'printing',
 fn: function (aStream){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(aStream)._nextPutAll_(_st("a ").__comma(_st(_st(self)._className())._asString()));
+var $1;
+_st(aStream)._nextPutAll_("a ".__comma(_st(self._className())._asString()));
+$1=self._isNil();
+if(smalltalk.assert($1)){
+_st(aStream)._nextPutAll_(" isNil !");
+};
 return self}, function($ctx1) {$ctx1.fill(self,"printOn:",{aStream:aStream},smalltalk.DrProxy)})},
 args: ["aStream"],
-source: "printOn: aStream\x0a\x09aStream nextPutAll: 'a ', self className asString",
-messageSends: ["nextPutAll:", ",", "asString", "className"],
+source: "printOn: aStream\x0a\x09aStream nextPutAll: 'a ', self className asString.\x0a\x09self isNil ifTrue: [aStream nextPutAll: ' isNil !']",
+messageSends: ["nextPutAll:", ",", "asString", "className", "ifTrue:", "isNil"],
 referencedClasses: []
 }),
 smalltalk.DrProxy);
@@ -405,17 +444,22 @@ fn: function (className,protoProxy){
 var self=this;
 var inst;
 return smalltalk.withContext(function($ctx1) { 
-var $1;
-inst=_st(self)._basicNew();
+var $1,$2;
+inst=self._basicNew();
 _st(inst)._className_(className);
+$1=protoProxy;
+if(($receiver = $1) == nil || $receiver == undefined){
+$1;
+} else {
 _st(inst)._jsObject_(_st(protoProxy)._jsObject());
+};
 _st(inst)._initialize();
-$1=inst;
-return $1;
+$2=inst;
+return $2;
 }, function($ctx1) {$ctx1.fill(self,"classNamed:protoProxy:",{className:className,protoProxy:protoProxy,inst:inst},smalltalk.DrProxy.klass)})},
 args: ["className", "protoProxy"],
-source: "classNamed: className protoProxy: protoProxy\x0a\x09| inst |\x0a\x09inst := self basicNew.\x0a\x09inst className: className.\x0a\x09inst jsObject: protoProxy jsObject.\x0a\x09inst initialize.\x0a\x09^inst",
-messageSends: ["basicNew", "className:", "jsObject:", "jsObject", "initialize"],
+source: "classNamed: className protoProxy: protoProxy\x0a\x09| inst |\x0a\x09inst := self basicNew.\x0a\x09inst className: className.\x0a\x09protoProxy ifNotNil: [inst jsObject: protoProxy jsObject].\x0a\x09inst initialize.\x0a\x09^inst",
+messageSends: ["basicNew", "className:", "ifNotNil:", "jsObject:", "jsObject", "initialize"],
 referencedClasses: []
 }),
 smalltalk.DrProxy.klass);
@@ -659,11 +703,11 @@ fn: function (aStream){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 _st(aStream)._nextPutAll_("Dropbox.ApiError");
-_st(aStream)._nextPutAll_(_st(":").__comma(_st(_st(self)._status())._asString()));
+_st(aStream)._nextPutAll_(_st(_st(":".__comma(_st(self._status())._asString())).__comma("/")).__comma(_st(self._responseText())._asString()));
 return self}, function($ctx1) {$ctx1.fill(self,"printOn:",{aStream:aStream},smalltalk.DrApiError)})},
 args: ["aStream"],
-source: "printOn: aStream\x0a\x09aStream nextPutAll: 'Dropbox.ApiError'.\x0a\x09aStream nextPutAll: ':', self status asString",
-messageSends: ["nextPutAll:", ",", "asString", "status"],
+source: "printOn: aStream\x0a\x09aStream nextPutAll: 'Dropbox.ApiError'.\x0a\x09aStream nextPutAll: ':', self status asString, '/', self responseText asString",
+messageSends: ["nextPutAll:", ",", "asString", "responseText", "status"],
 referencedClasses: []
 }),
 smalltalk.DrApiError);
@@ -927,7 +971,7 @@ smalltalk.DrApiError.klass);
 
 
 smalltalk.addClass('DrClient', smalltalk.DrProxy, ['announcer'], 'Dropbox-Client');
-smalltalk.DrClient.comment="DrClient defaultApiKey: 'your API key'.\x0a\x0adropboxCli := DrClient default.\x0adropboxCli authenticateThen: [\x0a  dropboxCli writeFile: 'hello.txt' data: 'world'.\x0a]."
+smalltalk.DrClient.comment="DrClient defaultApiKey: 'your API key'.\x0a\x0adropboxCli := DrClient default.\x0adropboxCli authenticateThen: [\x0a  dropboxCli writeFile: 'hello.txt' data: 'world'.\x0a].";
 smalltalk.addMethod(
 smalltalk.method({
 selector: "announcer",

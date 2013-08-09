@@ -89,6 +89,10 @@ className
 
 className: aString
 	className := aString
+!
+
+deferred
+	<return $.Deferred()>
 ! !
 
 !DrProxy methodsFor: 'debugging'!
@@ -120,7 +124,14 @@ onOpen: eventBlock
 !DrProxy methodsFor: 'printing'!
 
 printOn: aStream
-	aStream nextPutAll: 'a ', self className asString
+	aStream nextPutAll: 'a ', self className asString.
+	self isNil ifTrue: [aStream nextPutAll: ' isNil !!']
+! !
+
+!DrProxy methodsFor: 'testing'!
+
+isNil
+	^self jsObject isNil
 ! !
 
 !DrProxy class methodsFor: 'instance creation'!
@@ -129,7 +140,7 @@ classNamed: className protoProxy: protoProxy
 	| inst |
 	inst := self basicNew.
 	inst className: className.
-	inst jsObject: protoProxy jsObject.
+	protoProxy ifNotNil: [inst jsObject: protoProxy jsObject].
 	inst initialize.
 	^inst
 !
@@ -197,7 +208,7 @@ url: arg
 
 printOn: aStream
 	aStream nextPutAll: 'Dropbox.ApiError'.
-	aStream nextPutAll: ':', self status asString
+	aStream nextPutAll: ':', self status asString, '/', self responseText asString
 ! !
 
 !DrApiError methodsFor: 'testing'!
