@@ -189,8 +189,8 @@ setResolutionRule: fieldName with: rule
 	^ self forwardMessage: 'setResolutionRule' withArguments: {fieldName. rule}
 !
 
-update: value
-	^ self forwardMessage: 'update' withArguments: {value}
+update: values
+	^ self forwardMessage: 'update' withArguments: {(self objMapFrom: values)}
 ! !
 
 DrProxy subclass: #DrDsTable
@@ -238,15 +238,15 @@ basicGet: recordId
 !
 
 basicGetOrInsert: recordId with: defaultValues
-	^ self forwardMessage: 'getOrInsert' withArguments: {recordId. defaultValues}
+	^ self forwardMessage: 'getOrInsert' withArguments: {recordId. (self objMapFrom: defaultValues)}
 !
 
 basicInsert: fieldValues
-	^ self forwardMessage: 'insert' withArguments: {fieldValues}
+	^ self forwardMessage: 'insert' withArguments: {self objMapFrom: fieldValues}
 !
 
 basicQuery: fieldValues
-	^ self forwardMessage: 'query' withArguments: {fieldValues}
+	^ self forwardMessage: 'query' withArguments: {self objMapFrom: fieldValues}
 !
 
 basicQueryAll

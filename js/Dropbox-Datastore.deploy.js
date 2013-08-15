@@ -494,14 +494,14 @@ smalltalk.DrDsRecord);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "update:",
-fn: function (value){
+fn: function (values){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=self._forwardMessage_withArguments_("update",[value]);
+$1=self._forwardMessage_withArguments_("update",[self._objMapFrom_(values)]);
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"update:",{value:value},smalltalk.DrDsRecord)})},
-messageSends: ["forwardMessage:withArguments:"]}),
+}, function($ctx1) {$ctx1.fill(self,"update:",{values:values},smalltalk.DrDsRecord)})},
+messageSends: ["forwardMessage:withArguments:", "objMapFrom:"]}),
 smalltalk.DrDsRecord);
 
 
@@ -546,10 +546,10 @@ fn: function (recordId,defaultValues){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=self._forwardMessage_withArguments_("getOrInsert",[recordId,defaultValues]);
+$1=self._forwardMessage_withArguments_("getOrInsert",[recordId,self._objMapFrom_(defaultValues)]);
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"basicGetOrInsert:with:",{recordId:recordId,defaultValues:defaultValues},smalltalk.DrDsTable)})},
-messageSends: ["forwardMessage:withArguments:"]}),
+messageSends: ["forwardMessage:withArguments:", "objMapFrom:"]}),
 smalltalk.DrDsTable);
 
 smalltalk.addMethod(
@@ -559,10 +559,10 @@ fn: function (fieldValues){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=self._forwardMessage_withArguments_("insert",[fieldValues]);
+$1=self._forwardMessage_withArguments_("insert",[self._objMapFrom_(fieldValues)]);
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"basicInsert:",{fieldValues:fieldValues},smalltalk.DrDsTable)})},
-messageSends: ["forwardMessage:withArguments:"]}),
+messageSends: ["forwardMessage:withArguments:", "objMapFrom:"]}),
 smalltalk.DrDsTable);
 
 smalltalk.addMethod(
@@ -572,10 +572,10 @@ fn: function (fieldValues){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=self._forwardMessage_withArguments_("query",[fieldValues]);
+$1=self._forwardMessage_withArguments_("query",[self._objMapFrom_(fieldValues)]);
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"basicQuery:",{fieldValues:fieldValues},smalltalk.DrDsTable)})},
-messageSends: ["forwardMessage:withArguments:"]}),
+messageSends: ["forwardMessage:withArguments:", "objMapFrom:"]}),
 smalltalk.DrDsTable);
 
 smalltalk.addMethod(

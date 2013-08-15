@@ -277,6 +277,29 @@ smalltalk.DrDrivers.klass);
 smalltalk.addClass('DrProxy', smalltalk.JSObjectProxy, ['className'], 'Dropbox-Client');
 smalltalk.addMethod(
 smalltalk.method({
+selector: "basicObjMapFrom:",
+category: 'private',
+fn: function (aHashedCollection){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+		var map = {};
+		var assocs = aHashedCollection._associations();
+		assocs._do_(function(each){
+			map[each._key()] = each._value()._value();
+		});
+		return map;
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"basicObjMapFrom:",{aHashedCollection:aHashedCollection},smalltalk.DrProxy)})},
+args: ["aHashedCollection"],
+source: "basicObjMapFrom: aHashedCollection\x0a\x09<\x0a\x09\x09var map = {};\x0a\x09\x09var assocs = aHashedCollection._associations();\x0a\x09\x09assocs._do_(function(each){\x0a\x09\x09\x09map[each._key()] = each._value()._value();\x0a\x09\x09});\x0a\x09\x09return map;\x0a\x09>",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.DrProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "className",
 category: 'accessing',
 fn: function (){
@@ -363,6 +386,30 @@ args: [],
 source: "isNil\x0a\x09^self jsObject isNil\x0a\x09",
 messageSends: ["isNil", "jsObject"],
 referencedClasses: []
+}),
+smalltalk.DrProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "objMapFrom:",
+category: 'private',
+fn: function (aHashedCollection){
+var self=this;
+function $JSObjectProxy(){return smalltalk.JSObjectProxy||(typeof JSObjectProxy=="undefined"?nil:JSObjectProxy)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3;
+$1=_st(_st(aHashedCollection)._class()).__eq($JSObjectProxy());
+if(smalltalk.assert($1)){
+$2=aHashedCollection;
+return $2;
+};
+$3=self._basicObjMapFrom_(aHashedCollection);
+return $3;
+}, function($ctx1) {$ctx1.fill(self,"objMapFrom:",{aHashedCollection:aHashedCollection},smalltalk.DrProxy)})},
+args: ["aHashedCollection"],
+source: "objMapFrom: aHashedCollection\x0a\x09aHashedCollection class = JSObjectProxy ifTrue: [^aHashedCollection].\x0a\x09^self basicObjMapFrom: aHashedCollection\x0a\x09",
+messageSends: ["ifTrue:", "=", "class", "basicObjMapFrom:"],
+referencedClasses: ["JSObjectProxy"]
 }),
 smalltalk.DrProxy);
 

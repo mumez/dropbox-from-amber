@@ -202,6 +202,24 @@ smalltalk.DrDrivers.klass);
 smalltalk.addClass('DrProxy', smalltalk.JSObjectProxy, ['className'], 'Dropbox-Client');
 smalltalk.addMethod(
 smalltalk.method({
+selector: "basicObjMapFrom:",
+fn: function (aHashedCollection){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+		var map = {};
+		var assocs = aHashedCollection._associations();
+		assocs._do_(function(each){
+			map[each._key()] = each._value()._value();
+		});
+		return map;
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"basicObjMapFrom:",{aHashedCollection:aHashedCollection},smalltalk.DrProxy)})},
+messageSends: []}),
+smalltalk.DrProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "className",
 fn: function (){
 var self=this;
@@ -264,6 +282,25 @@ $1=_st(self._jsObject())._isNil();
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"isNil",{},smalltalk.DrProxy)})},
 messageSends: ["isNil", "jsObject"]}),
+smalltalk.DrProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "objMapFrom:",
+fn: function (aHashedCollection){
+var self=this;
+function $JSObjectProxy(){return smalltalk.JSObjectProxy||(typeof JSObjectProxy=="undefined"?nil:JSObjectProxy)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3;
+$1=_st(_st(aHashedCollection)._class()).__eq($JSObjectProxy());
+if(smalltalk.assert($1)){
+$2=aHashedCollection;
+return $2;
+};
+$3=self._basicObjMapFrom_(aHashedCollection);
+return $3;
+}, function($ctx1) {$ctx1.fill(self,"objMapFrom:",{aHashedCollection:aHashedCollection},smalltalk.DrProxy)})},
+messageSends: ["ifTrue:", "=", "class", "basicObjMapFrom:"]}),
 smalltalk.DrProxy);
 
 smalltalk.addMethod(

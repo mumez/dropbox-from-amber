@@ -128,6 +128,24 @@ printOn: aStream
 	self isNil ifTrue: [aStream nextPutAll: ' isNil !!']
 ! !
 
+!DrProxy methodsFor: 'private'!
+
+basicObjMapFrom: aHashedCollection
+	<
+		var map = {};
+		var assocs = aHashedCollection._associations();
+		assocs._do_(function(each){
+			map[each._key()] = each._value()._value();
+		});
+		return map;
+	>
+!
+
+objMapFrom: aHashedCollection
+	aHashedCollection class = JSObjectProxy ifTrue: [^aHashedCollection].
+	^self basicObjMapFrom: aHashedCollection
+! !
+
 !DrProxy methodsFor: 'testing'!
 
 isNil
