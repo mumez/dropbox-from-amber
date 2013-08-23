@@ -83,6 +83,36 @@ listTableIds
 	^ self forwardMessage: 'listTableIds' withArguments: #()
 ! !
 
+!DrDsDatastore methodsFor: 'events'!
+
+offRecordsChanged: aBlock
+	<
+	var o = self['@jsObject'];
+	o.recordsChanged.removeListener(aBlock)
+	>
+!
+
+offSyncStatusChanged: aBlock
+	<
+	var o = self['@jsObject'];
+	o.syncStatusChanged.removeListener(aBlock)
+	>
+!
+
+onRecordsChanged: aBlock
+	<
+	var o = self['@jsObject'];
+	o.recordsChanged.addListener(aBlock)
+	>
+!
+
+onSyncStatusChanged: aBlock
+	<
+	var o = self['@jsObject'];
+	o.syncStatusChanged.addListener(aBlock)
+	>
+! !
+
 DrProxy subclass: #DrDsDatastoreManager
 	instanceVariableNames: ''
 	package: 'Dropbox-Datastore'!

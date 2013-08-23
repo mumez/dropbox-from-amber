@@ -175,6 +175,62 @@ smalltalk.DrDsDatastore);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "offRecordsChanged:",
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.recordsChanged.removeListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"offRecordsChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+messageSends: []}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "offSyncStatusChanged:",
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.syncStatusChanged.removeListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"offSyncStatusChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+messageSends: []}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "onRecordsChanged:",
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.recordsChanged.addListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"onRecordsChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+messageSends: []}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "onSyncStatusChanged:",
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.syncStatusChanged.addListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"onSyncStatusChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+messageSends: []}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "recordsChanged",
 fn: function (){
 var self=this;

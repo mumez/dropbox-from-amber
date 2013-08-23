@@ -235,6 +235,82 @@ smalltalk.DrDsDatastore);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "offRecordsChanged:",
+category: 'events',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.recordsChanged.removeListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"offRecordsChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+args: ["aBlock"],
+source: "offRecordsChanged: aBlock\x0a\x09<\x0a\x09var o = self['@jsObject'];\x0a\x09o.recordsChanged.removeListener(aBlock)\x0a\x09>",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "offSyncStatusChanged:",
+category: 'events',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.syncStatusChanged.removeListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"offSyncStatusChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+args: ["aBlock"],
+source: "offSyncStatusChanged: aBlock\x0a\x09<\x0a\x09var o = self['@jsObject'];\x0a\x09o.syncStatusChanged.removeListener(aBlock)\x0a\x09>",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "onRecordsChanged:",
+category: 'events',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.recordsChanged.addListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"onRecordsChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+args: ["aBlock"],
+source: "onRecordsChanged: aBlock\x0a\x09<\x0a\x09var o = self['@jsObject'];\x0a\x09o.recordsChanged.addListener(aBlock)\x0a\x09>",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "onSyncStatusChanged:",
+category: 'events',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.syncStatusChanged.addListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"onSyncStatusChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+args: ["aBlock"],
+source: "onSyncStatusChanged: aBlock\x0a\x09<\x0a\x09var o = self['@jsObject'];\x0a\x09o.syncStatusChanged.addListener(aBlock)\x0a\x09>",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "recordsChanged",
 category: 'accessing',
 fn: function (){
