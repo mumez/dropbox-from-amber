@@ -1,6 +1,12 @@
 DropboxFromAmber
 ==================
 
+Newer:
+[Dropbox Datastore API](https://www.dropbox.com/developers/datastore) & [dropbox.js](https://github.com/dropbox/dropbox-js) wrapper for Amber Smalltalk.
+
+Currently, new version is not documented yet. No sample codes. But [Dropbox-Datastore.st](https://github.com/mumez/dropbox-from-amber/blob/master/st/Dropbox-Datastore.st) is a package for the Datastore API support.
+
+Legacy:
 [dropbox.js](https://github.com/dropbox/dropbox-js) wrapper for Amber Smalltalk
 
 ## Installation ##
