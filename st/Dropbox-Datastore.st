@@ -100,13 +100,27 @@ offSyncStatusChanged: aBlock
 !
 
 onRecordsChanged: aBlock
+	self basicOnRecordsChanged: [:ev | 
+		aBlock value: (DrRecordsChanged protoProxy: ev)
+	]
+!
+
+onSyncStatusChanged: aBlock
+	self basicOnSyncStatusChanged: [:ev | 
+		aBlock value: (DrRecordsChanged protoProxy: ev)
+	]
+! !
+
+!DrDsDatastore methodsFor: 'events-basic'!
+
+basicOnRecordsChanged: aBlock
 	<
 	var o = self['@jsObject'];
 	o.recordsChanged.addListener(aBlock)
 	>
 !
 
-onSyncStatusChanged: aBlock
+basicOnSyncStatusChanged: aBlock
 	<
 	var o = self['@jsObject'];
 	o.syncStatusChanged.addListener(aBlock)
@@ -287,5 +301,42 @@ basicQueryAll
 
 asRecord: jsObj
 	^ jsObj ifNotNil: [DrDsRecord protoProxy: jsObj]
+! !
+
+DrProxy subclass: #DrRecordsChanged
+	instanceVariableNames: ''
+	package: 'Dropbox-Datastore'!
+
+!DrRecordsChanged methodsFor: 'actions'!
+
+affectedRecordsByTable
+	| dict |
+	dict := HashedCollection new.
+	self basicAffectedRecordsByTable keysAndValuesDo: [:key :rawRecords |
+		dict at: key put: (rawRecords collect: [:ea | (DrDsRecord protoProxy: ea)])
+	].
+	^dict
+!
+
+affectedRecordsForTable: tableId
+	| rawRecords | 
+	rawRecords := self basicAffectedRecordsForTable: tableId.
+	^ rawRecords collect: [:each | DrDsRecord protoProxy: each]
+! !
+
+!DrRecordsChanged methodsFor: 'actions-basic'!
+
+basicAffectedRecordsByTable
+	^ self forwardMessage: 'affectedRecordsByTable' withArguments: #()
+!
+
+basicAffectedRecordsForTable: tableId
+	^ self forwardMessage: 'affectedRecordsForTable' withArguments: {tableId}
+! !
+
+!DrRecordsChanged methodsFor: 'testing'!
+
+isLocal
+	^ self forwardMessage: 'isLocal' withArguments: #()
 ! !
 

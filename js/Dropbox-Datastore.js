@@ -144,6 +144,44 @@ smalltalk.DrDsDatastore);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "basicOnRecordsChanged:",
+category: 'events-basic',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.recordsChanged.addListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"basicOnRecordsChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+args: ["aBlock"],
+source: "basicOnRecordsChanged: aBlock\x0a\x09<\x0a\x09var o = self['@jsObject'];\x0a\x09o.recordsChanged.addListener(aBlock)\x0a\x09>",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "basicOnSyncStatusChanged:",
+category: 'events-basic',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+
+	var o = self['@jsObject'];
+	o.syncStatusChanged.addListener(aBlock)
+	;
+return self}, function($ctx1) {$ctx1.fill(self,"basicOnSyncStatusChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
+args: ["aBlock"],
+source: "basicOnSyncStatusChanged: aBlock\x0a\x09<\x0a\x09var o = self['@jsObject'];\x0a\x09o.syncStatusChanged.addListener(aBlock)\x0a\x09>",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.DrDsDatastore);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "close",
 category: 'actions',
 fn: function (){
@@ -277,16 +315,17 @@ selector: "onRecordsChanged:",
 category: 'events',
 fn: function (aBlock){
 var self=this;
+function $DrRecordsChanged(){return smalltalk.DrRecordsChanged||(typeof DrRecordsChanged=="undefined"?nil:DrRecordsChanged)}
 return smalltalk.withContext(function($ctx1) { 
-
-	var o = self['@jsObject'];
-	o.recordsChanged.addListener(aBlock)
-	;
+self._basicOnRecordsChanged_((function(ev){
+return smalltalk.withContext(function($ctx2) {
+return _st(aBlock)._value_(_st($DrRecordsChanged())._protoProxy_(ev));
+}, function($ctx2) {$ctx2.fillBlock({ev:ev},$ctx1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"onRecordsChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
 args: ["aBlock"],
-source: "onRecordsChanged: aBlock\x0a\x09<\x0a\x09var o = self['@jsObject'];\x0a\x09o.recordsChanged.addListener(aBlock)\x0a\x09>",
-messageSends: [],
-referencedClasses: []
+source: "onRecordsChanged: aBlock\x0a\x09self basicOnRecordsChanged: [:ev | \x0a\x09\x09aBlock value: (DrRecordsChanged protoProxy: ev)\x0a\x09]",
+messageSends: ["basicOnRecordsChanged:", "value:", "protoProxy:"],
+referencedClasses: ["DrRecordsChanged"]
 }),
 smalltalk.DrDsDatastore);
 
@@ -296,16 +335,17 @@ selector: "onSyncStatusChanged:",
 category: 'events',
 fn: function (aBlock){
 var self=this;
+function $DrRecordsChanged(){return smalltalk.DrRecordsChanged||(typeof DrRecordsChanged=="undefined"?nil:DrRecordsChanged)}
 return smalltalk.withContext(function($ctx1) { 
-
-	var o = self['@jsObject'];
-	o.syncStatusChanged.addListener(aBlock)
-	;
+self._basicOnSyncStatusChanged_((function(ev){
+return smalltalk.withContext(function($ctx2) {
+return _st(aBlock)._value_(_st($DrRecordsChanged())._protoProxy_(ev));
+}, function($ctx2) {$ctx2.fillBlock({ev:ev},$ctx1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"onSyncStatusChanged:",{aBlock:aBlock},smalltalk.DrDsDatastore)})},
 args: ["aBlock"],
-source: "onSyncStatusChanged: aBlock\x0a\x09<\x0a\x09var o = self['@jsObject'];\x0a\x09o.syncStatusChanged.addListener(aBlock)\x0a\x09>",
-messageSends: [],
-referencedClasses: []
+source: "onSyncStatusChanged: aBlock\x0a\x09self basicOnSyncStatusChanged: [:ev | \x0a\x09\x09aBlock value: (DrRecordsChanged protoProxy: ev)\x0a\x09]",
+messageSends: ["basicOnSyncStatusChanged:", "value:", "protoProxy:"],
+referencedClasses: ["DrRecordsChanged"]
 }),
 smalltalk.DrDsDatastore);
 
@@ -1022,6 +1062,116 @@ messageSends: ["forwardMessage:withArguments:"],
 referencedClasses: []
 }),
 smalltalk.DrDsTable);
+
+
+
+smalltalk.addClass('DrRecordsChanged', smalltalk.DrProxy, [], 'Dropbox-Datastore');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "affectedRecordsByTable",
+category: 'actions',
+fn: function (){
+var self=this;
+var dict;
+function $HashedCollection(){return smalltalk.HashedCollection||(typeof HashedCollection=="undefined"?nil:HashedCollection)}
+function $DrDsRecord(){return smalltalk.DrDsRecord||(typeof DrDsRecord=="undefined"?nil:DrDsRecord)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+dict=_st($HashedCollection())._new();
+_st(self._basicAffectedRecordsByTable())._keysAndValuesDo_((function(key,rawRecords){
+return smalltalk.withContext(function($ctx2) {
+return _st(dict)._at_put_(key,_st(rawRecords)._collect_((function(ea){
+return smalltalk.withContext(function($ctx3) {
+return _st($DrDsRecord())._protoProxy_(ea);
+}, function($ctx3) {$ctx3.fillBlock({ea:ea},$ctx2)})})));
+}, function($ctx2) {$ctx2.fillBlock({key:key,rawRecords:rawRecords},$ctx1)})}));
+$1=dict;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"affectedRecordsByTable",{dict:dict},smalltalk.DrRecordsChanged)})},
+args: [],
+source: "affectedRecordsByTable\x0a\x09| dict |\x0a\x09dict := HashedCollection new.\x0a\x09self basicAffectedRecordsByTable keysAndValuesDo: [:key :rawRecords |\x0a\x09\x09dict at: key put: (rawRecords collect: [:ea | (DrDsRecord protoProxy: ea)])\x0a\x09].\x0a\x09^dict",
+messageSends: ["new", "keysAndValuesDo:", "at:put:", "collect:", "protoProxy:", "basicAffectedRecordsByTable"],
+referencedClasses: ["HashedCollection", "DrDsRecord"]
+}),
+smalltalk.DrRecordsChanged);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "affectedRecordsForTable:",
+category: 'actions',
+fn: function (tableId){
+var self=this;
+var rawRecords;
+function $DrDsRecord(){return smalltalk.DrDsRecord||(typeof DrDsRecord=="undefined"?nil:DrDsRecord)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+rawRecords=self._basicAffectedRecordsForTable_(tableId);
+$1=_st(rawRecords)._collect_((function(each){
+return smalltalk.withContext(function($ctx2) {
+return _st($DrDsRecord())._protoProxy_(each);
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1)})}));
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"affectedRecordsForTable:",{tableId:tableId,rawRecords:rawRecords},smalltalk.DrRecordsChanged)})},
+args: ["tableId"],
+source: "affectedRecordsForTable: tableId\x0a\x09| rawRecords | \x0a\x09rawRecords := self basicAffectedRecordsForTable: tableId.\x0a\x09^ rawRecords collect: [:each | DrDsRecord protoProxy: each]",
+messageSends: ["basicAffectedRecordsForTable:", "collect:", "protoProxy:"],
+referencedClasses: ["DrDsRecord"]
+}),
+smalltalk.DrRecordsChanged);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "basicAffectedRecordsByTable",
+category: 'actions-basic',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._forwardMessage_withArguments_("affectedRecordsByTable",[]);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"basicAffectedRecordsByTable",{},smalltalk.DrRecordsChanged)})},
+args: [],
+source: "basicAffectedRecordsByTable\x0a\x09^ self forwardMessage: 'affectedRecordsByTable' withArguments: #()",
+messageSends: ["forwardMessage:withArguments:"],
+referencedClasses: []
+}),
+smalltalk.DrRecordsChanged);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "basicAffectedRecordsForTable:",
+category: 'actions-basic',
+fn: function (tableId){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._forwardMessage_withArguments_("affectedRecordsForTable",[tableId]);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"basicAffectedRecordsForTable:",{tableId:tableId},smalltalk.DrRecordsChanged)})},
+args: ["tableId"],
+source: "basicAffectedRecordsForTable: tableId\x0a\x09^ self forwardMessage: 'affectedRecordsForTable' withArguments: {tableId}",
+messageSends: ["forwardMessage:withArguments:"],
+referencedClasses: []
+}),
+smalltalk.DrRecordsChanged);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "isLocal",
+category: 'testing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._forwardMessage_withArguments_("isLocal",[]);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"isLocal",{},smalltalk.DrRecordsChanged)})},
+args: [],
+source: "isLocal\x0a\x09^ self forwardMessage: 'isLocal' withArguments: #()",
+messageSends: ["forwardMessage:withArguments:"],
+referencedClasses: []
+}),
+smalltalk.DrRecordsChanged);
 
 
 
